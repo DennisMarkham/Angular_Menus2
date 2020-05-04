@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" type="text/css" href="chinese.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+
+<div ng-app="myApp" ng-controller="menuCtrl">
+
+  <h1> Appetizers </h1>
+<table border="1" width="100%" rules = "none">
+  <tr>
+    <th ng-click="orderByMe('food')">Dish</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr>
+  <tr ng-repeat="x in appetizer | orderBy:myOrderBy">
+    <!-- Very awkward way to deal with display spice.  May remove.  Most dishes are not spicy
+      Yet as is spice shows up by default.  If only I could be HTML Angular object-->
+    <td>{{x.food}} <span class = "spice" style = "display:{{x.spice}}"><i class='fas fa-pepper-hot'></i></span></td>
+    <td>{{x.price | currency}}</td>
+  </tr>
+</table>
+
+<h1> Main </h1>
+<table border="1" width="100%" rules = "none">
+  <tr>
+    <th ng-click="orderByMe('food')">Dish</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr>
+  <tr ng-repeat="x in main | orderBy:myOrderBy">
+    <!-- Very awkward way to deal with display spice.  May remove.  Most dishes are not spicy
+      Yet as is spice shows up by default.  If only I could be HTML Angular object-->
+    <td>{{x.food}} <span class = "spice" style = "display:{{x.spice}}"><i class='fas fa-pepper-hot'></i></span></td>
+    <td>{{x.price | currency}}</td>
+  </tr>
+</table>
+
+</div>
+
+<script>
+angular.module('myApp', []).controller('menuCtrl', function($scope) {
+  $scope.main = [
+    {food:'Shrimp Lo-Mien', price:'15', spice: "none"},
+    {food:'Pork Lo-Mien', price:'14', spice: "none"},
+    {food: 'Beef and Brocoli', price: '13', spice: "none"},
+    {food: 'Mongolian Beef', price: '14'},
+    {food: 'Kung Poa Shrimp', price: '16'}
+  ];
+  $scope.appetizer = [
+ {food:'Wonton Soup', price:'5', spice: "none"},
+    {food:'Barbeque Pork Ribs', price:'8', spice: "none"}
+  ]
+  $scope.orderByMe = function(x) {
+    $scope.myOrderBy = x;
+  }
+});
+</script>
+
+</body>
+</html>
