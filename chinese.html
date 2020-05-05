@@ -5,13 +5,19 @@
   <link rel="stylesheet" type="text/css" href="chinese.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 
-<body>
+<body onload = "opened()">
+
 
 <div ng-app="myApp" ng-controller="menuCtrl">
+<h1>Ding's Table</h1>
+Hours: 11am - 8pm
+<span id = "opened"> (Closed) </span>
+<br>
+  <h2> Appetizers </h2>
 
-  <h1> Appetizers </h1>
 <table border="1" width="100%" rules = "none">
   <tr>
     <th ng-click="orderByMe('food')">Dish</th>
@@ -24,8 +30,8 @@
     <td>{{x.price | currency}}</td>
   </tr>
 </table>
-
-<h1> Main </h1>
+<br> 
+<h2> Main </h2>
 <table border="1" width="100%" rules = "none">
   <tr>
     <th ng-click="orderByMe('food')">Dish</th>
@@ -38,7 +44,22 @@
     <td>{{x.price | currency}}</td>
   </tr>
 </table>
+<br> 
+<h2> Drinks </h2>
+<table border="1" width="100%" rules = "none">
+  <tr>
+    <th ng-click="orderByMe('drink')">Drink</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr>
+  <tr ng-repeat="x in drinks | orderBy:myOrderBy">
+    <!-- Very awkward way to deal with display spice.  May remove.  Most dishes are not spicy
+      Yet as is spice shows up by default.  If only I could be HTML Angular object-->
+    <td>{{x.drink}} </td>
+    <td>{{x.price | currency}}</td>
+  </tr>
+</table>
 
+<div id = "empty"></div>
 </div>
 
 <script>
@@ -50,14 +71,35 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
     {food: 'Mongolian Beef', price: '14'},
     {food: 'Kung Poa Shrimp', price: '16'}
   ];
+
   $scope.appetizer = [
  {food:'Wonton Soup', price:'5', spice: "none"},
     {food:'Barbeque Pork Ribs', price:'8', spice: "none"}
   ]
+
+  $scope.drinks = [
+ {drink:'Apple Juice', price:'2'},
+    {drink:'Ice Tea (sweet or unsweet)', price:'3'},
+    {drink: 'Beer (Corona, Bud Light, Samuel Adams)', price: '4'}
+  ]
+
   $scope.orderByMe = function(x) {
     $scope.myOrderBy = x;
   }
+
+   $scope.theTime = new Date().toLocaleTimeString();
+  
 });
+
+// real:
+var hours = parseFloat(moment().startOf('day').fromNow());
+// tester:
+// var hours = 12;
+function opened()
+{
+   if (hours >= 11 && hours <= 20)
+    document.getElementById("opened").innerHTML = "Opened";
+}
 </script>
 
 </body>

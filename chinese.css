@@ -2,10 +2,25 @@ table
 {
 	border-color: yellow;
 	border-width:5px;
+
 }
 
+h1
+{
+	font-color: yellow;
+	text-align: center;
+}
 
 body
 {
 	background-color: red;
+	background-image: url("dragon.png"), url("dragon.png");
+background-position: 1% 2%, 1% 98%;
+background-repeat: no-repeat;
+background-size: 50px 50px;
+}
+
+#empty
+{
+	height: 100px;
 }
