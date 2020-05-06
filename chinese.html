@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>DingLong's Menu</title>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link rel="stylesheet" type="text/css" href="chinese.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,7 +13,9 @@
 
 
 <div ng-app="myApp" ng-controller="menuCtrl">
-<h1>Ding's Table</h1>
+<h1>DingLong's Table</h1>
+<h2>Chinese Cuisine</h2>
+<h2><span style = "background-color:gold; padding: 2px;"> DINE IN/TAKE OUT </span></h2>
 Hours: 11am - 8pm
 <span id = "opened"> (Closed) </span>
 <br>
@@ -48,19 +51,25 @@ Hours: 11am - 8pm
 <h2> Drinks </h2>
 <table border="1" width="100%" rules = "none">
   <tr>
-    <th ng-click="orderByMe('drink')">Drink</th>
+    <th ng-click="orderByMe('food')">Drink</th>
     <th ng-click="orderByMe('price')">Price</th>
   </tr>
   <tr ng-repeat="x in drinks | orderBy:myOrderBy">
     <!-- Very awkward way to deal with display spice.  May remove.  Most dishes are not spicy
       Yet as is spice shows up by default.  If only I could be HTML Angular object-->
-    <td>{{x.drink}} </td>
+    <td>{{x.food}} </td>
     <td>{{x.price | currency}}</td>
   </tr>
 </table>
+<br>
+<div id = "wings">
+  <h3>FREE</h3>
+  <p>FRIED CHICKEN WINGS WITH $35 PURCHASES (DELIVERY ONLY)</p>
+</div>
 
 <div id = "empty"></div>
 </div>
+
 
 <script>
 angular.module('myApp', []).controller('menuCtrl', function($scope) {
@@ -74,15 +83,30 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
 
   $scope.appetizer = [
  {food:'Wonton Soup', price:'5', spice: "none"},
-    {food:'Barbeque Pork Ribs', price:'8', spice: "none"}
+    {food:'Barbeque Pork Ribs', price:'8', spice: "none"},
+    {food: 'Chicken Wings', price: '5', spice: "none"}
   ]
 
   $scope.drinks = [
- {drink:'Apple Juice', price:'2'},
-    {drink:'Ice Tea (sweet or unsweet)', price:'3'},
-    {drink: 'Beer (Corona, Bud Light, Samuel Adams)', price: '4'}
+ {food:'Apple Juice', price:'2'},
+    {food:'Ice Tea (sweet or unsweet)', price:'3'},
+    {food: 'Beer (Corona, Bud Light, Samuel Adams)', price: '4'}
   ]
 
+   $scope.desserts = [
+ {food:'New York Style Ice-Cream', price:'2'},
+    {food:'Ice Tea (sweet or unsweet)', price:'3'},
+    {food: 'Beer (Corona, Bud Light, Samuel Adams)', price: '4'}
+  ]
+
+//OB = filter
+//OBM = function
+//MOB = function input
+
+//so what I want, in theory, is some function which checks if the input, MOB, is already food
+//or price, ie if its already what is trying to switch to, and if so ordersBy in reverse.  Checking
+//seems easy, ordering in reverse seems nigh impossible.  Hm.
+//though you could have two buttons, each represented by a different arrow.
   $scope.orderByMe = function(x) {
     $scope.myOrderBy = x;
   }
@@ -98,7 +122,7 @@ var hours = parseFloat(moment().startOf('day').fromNow());
 function opened()
 {
    if (hours >= 11 && hours <= 20)
-    document.getElementById("opened").innerHTML = "Opened";
+    document.getElementById("opened").innerHTML = "(Opened)";
 }
 </script>
 

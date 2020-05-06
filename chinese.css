@@ -2,7 +2,12 @@ table
 {
 	border-color: yellow;
 	border-width:5px;
+	
+}
 
+h2
+{
+	text-align: center;
 }
 
 h1
@@ -11,6 +16,13 @@ h1
 	text-align: center;
 }
 
+#wings
+{
+	margin-top: 100px;
+	border-style: dashed;
+	border-width: 4px;
+	text-align: center;
+}
 body
 {
 	background-color: red;
