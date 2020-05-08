@@ -25,17 +25,34 @@
    <div class="col-md-8">
    	
    	<div ng-app="myApp" ng-controller="menuCtrl">
-   	<table border="1" width = "100%" rules = "none">
-  <tr>
-    <th ng-click="orderByMe('food')">Food</th>
+   		<h2>Pasta</h2>
+   	<table width = "100%" rules = "none">
+ <!--  <tr>
+    <th ng-click="orderByMe('food')">Dish</th>
     <th ng-click="orderByMe('price')">Price</th>
-  </tr>
+  </tr> -->
   <tr ng-repeat="x in pasta | orderBy:myOrderBy">
     
-    <td>{{x.food}} </td>
-    <td>{{x.price | currency}}</td>
+    <td ng-click="orderByMe('food')">{{x.food}}</td>
+    <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
+    
   </tr>
 </table>
+
+<h2>Dessert</h2>
+   	<table width = "100%" rules = "none">
+ <!--  <tr>
+    <th ng-click="orderByMe('food')">Dish</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr> -->
+  <tr ng-repeat="x in dessert | orderBy:myOrderBy">
+    
+    <td ng-click="orderByMe('food')">{{x.food}}</td>
+    <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
+    
+  </tr>
+</table>
+
 </div>
 
 </div>
@@ -48,6 +65,11 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
     {food:'Fettucini Alfredo', price:'8', spice: "none"},
     {food:'Lizzagna', price:'7', spice: "none"},
     {food: 'Spagehetti & Meatballs', price: '6', spice: "none"}
+  ];
+
+  $scope.dessert = [
+    {food:'Canole', price:'4', spice: "none"},
+    {food:'Giletto', price:'3', spice: "none"}
   ];
 
     $scope.orderByMe = function(x) {

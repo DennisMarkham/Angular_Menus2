@@ -8,8 +8,14 @@ background-color: green;
 	background-color: red;
 }
 
-table
-{
-	border-width: 5px;
 
+.col-md-8
+{
+	border-style: solid;
+	border-width: 5px;
+}
+
+td[ng-click="orderByMe('price')"]
+{
+float:right;
 }
