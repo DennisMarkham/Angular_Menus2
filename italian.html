@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<link rel = "stylesheet" type="text/css" href="italian.css">
+</head>
+<body>
+	<div class = "container-fluid">
+	<div class="row">
+  <div class="col-md-2" id = "left"></div>
+   
+   <div class="col-md-8">
+   	
+   	<div ng-app="myApp" ng-controller="menuCtrl">
+   	<table border="1" width = "100%" rules = "none">
+  <tr>
+    <th ng-click="orderByMe('food')">Food</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr>
+  <tr ng-repeat="x in pasta | orderBy:myOrderBy">
+    
+    <td>{{x.food}} </td>
+    <td>{{x.price | currency}}</td>
+  </tr>
+</table>
+</div>
+
+</div>
+  <div class="col-md-2" id = "right"></div>
+</div>
+</div>
+<script>
+angular.module('myApp', []).controller('menuCtrl', function($scope) {
+  $scope.pasta = [
+    {food:'Fettucini Alfredo', price:'8', spice: "none"},
+    {food:'Lizzagna', price:'7', spice: "none"},
+    {food: 'Spagehetti & Meatballs', price: '6', spice: "none"}
+  ];
+
+    $scope.orderByMe = function(x) {
+    $scope.myOrderBy = x;
+  }
+
+   $scope.theTime = new Date().toLocaleTimeString();
+  
+});
+
+
+
+</script>
+	</body>
+	</html>
