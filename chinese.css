@@ -36,3 +36,11 @@ background-size: 50px 50px;
 {
 	height: 100px;
 }
+
+/*#empty was only added for asthtetics with the dragons.  Since the dragons don't print,
+reducing empty to zero saves printer a page*/
+@media print
+{
+	#empty
+	{height: 0px;}
+}
