@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-   <meta name="description" content ="Fake Italian restaraunt menu." />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -17,79 +15,38 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-<link rel = "stylesheet" type="text/css" href="italian.css">
+<link rel = "stylesheet" type="text/css" href="American.css">
 </head>
 <body>
+
 	<div class = "container-fluid">
 	<div class="row">
-  <div class="col-md-2" id = "left"></div>
-   
-   <div class="col-md-8">
-   	
-   	<div ng-app="myApp" ng-controller="menuCtrl">
-   		<h2>Pasta</h2>
+  <div class="col-md-2" id = "stars"></div>
+	<div class = "col-md-8">
+		<div ng-app="myApp" ng-controller="menuCtrl">
+		<h2>Burgers</h2>
    	<table width = "100%" rules = "none">
  <!--  <tr>
     <th ng-click="orderByMe('food')">Dish</th>
     <th ng-click="orderByMe('price')">Price</th>
   </tr> -->
-  <tr ng-repeat="x in pasta | orderBy:myOrderBy">
-    
-  <td ng-click="orderByMe('food')">{{x.food}}</td> <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
-  
-    
-  </tr>
-</table>
-<br>
-<h2>Salads</h2>
-   	<table width = "100%" rules = "none">
- <!--  <tr>
-    <th ng-click="orderByMe('food')">Dish</th>
-    <th ng-click="orderByMe('price')">Price</th>
-  </tr> -->
-  <tr ng-repeat="x in salad | orderBy:myOrderBy">
+  <tr ng-repeat="x in burgers | orderBy:myOrderBy">
     
     <td ng-click="orderByMe('food')">{{x.food}} <br> <span class = "sum"> {{x.summary}} </span></td>
     <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
     
   </tr>
 </table>
-<br>
-<h2>Dessert</h2>
-   	<table width = "100%" rules = "none">
- <!--  <tr>
-    <th ng-click="orderByMe('food')">Dish</th>
-    <th ng-click="orderByMe('price')">Price</th>
-  </tr> -->
-  <tr ng-repeat="x in dessert | orderBy:myOrderBy">
-    
-    <td ng-click="orderByMe('food')">{{x.food}}</td>
-    <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
-    
-  </tr>
-</table>
-
-
+</div>
+	</div>
+  <div class="col-md-2" id = "bars"></div>
+</div>
 </div>
 
-</div>
-  <div class="col-md-2" id = "right"></div>
-</div>
-</div>
 <script>
 angular.module('myApp', []).controller('menuCtrl', function($scope) {
-  $scope.pasta = [
-    {food:'Fettucini Alfredo', price:'8', spice: "none"},
-    {food:'Lizzagna', price:'7', spice: "none"},
-    {food: 'Spagehetti & Meatballs', price: '6', spice: "none"}
-  ];
 
-  $scope.dessert = [
-    {food:'Canole', price:'4', spice: "none"},
-    {food:'Giletto', price:'3', spice: "none"}
-  ];
-
-  $scope.salad =
+  $scope.burgers =
   [
   {food: "Garden Salad", price: '4', summary: "Lettuce, tomatos, cucumbers, olivers, red peppers, italian dressing"},
   {food: "Chicken Ceasar Salad", price: '6', summary: "Chicken, feta cheese, red peppers, onions, arctichokes, ceasar dressing"}

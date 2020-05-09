@@ -1,0 +1,17 @@
+#stars
+{
+background-image: url(stars.png);
+opacity: 0.5;
+}
+
+#bars
+{
+	background-image: url(bars.png);
+	opacity: 0.5;
+}
+
+.col-md-8
+{
+	font-family: Magneto;
+
+}
