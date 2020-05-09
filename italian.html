@@ -33,7 +33,21 @@
   </tr> -->
   <tr ng-repeat="x in pasta | orderBy:myOrderBy">
     
-    <td ng-click="orderByMe('food')">{{x.food}}</td>
+  <td ng-click="orderByMe('food')">{{x.food}}</td> <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
+  
+    
+  </tr>
+</table>
+<br>
+<h2>Salads</h2>
+   	<table width = "100%" rules = "none">
+ <!--  <tr>
+    <th ng-click="orderByMe('food')">Dish</th>
+    <th ng-click="orderByMe('price')">Price</th>
+  </tr> -->
+  <tr ng-repeat="x in salad | orderBy:myOrderBy">
+    
+    <td ng-click="orderByMe('food')">{{x.food}} <br> <span class = "sum"> {{x.summary}} </span></td>
     <td ng-click="orderByMe('price')">{{x.price | currency}}</td>
     
   </tr>
@@ -53,6 +67,7 @@
   </tr>
 </table>
 
+
 </div>
 
 </div>
@@ -71,6 +86,12 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
     {food:'Canole', price:'4', spice: "none"},
     {food:'Giletto', price:'3', spice: "none"}
   ];
+
+  $scope.salad =
+  [
+  {food: "Garden Salad", price: '4', summary: "Lettuce, tomatos, cucumbers, olivers, red peppers, italian dressing"},
+  {food: "Chicken Ceasar Salad", price: '6', summary: "Chicken, feta cheese, red peppers, onions, arctichokes, ceasar dressing"}
+  ]
 
     $scope.orderByMe = function(x) {
     $scope.myOrderBy = x;
