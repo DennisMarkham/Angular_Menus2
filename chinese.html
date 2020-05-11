@@ -72,7 +72,14 @@ Hours: 11am - 8pm
 <hr>
 <h2> Order </h2>
 <form>
+ <!--  So I need to somehow extra the price of the item, and the number in the 'number' input, multiply
+  them, and then add the resulting number to a "total" variable.  Hmmm -->
+  <h3 class = "orderSec">Main</h3>
   <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10"></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}}></input></div>
+  <br>
+  Total: <span id = "total"></span>
+  <br>
+  <input type = "submit">
   </form>
 </div>
 
