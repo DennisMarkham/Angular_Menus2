@@ -68,6 +68,14 @@ Hours: 11am - 8pm
   <p>FRIED CHICKEN WINGS WITH $35 PURCHASES (DELIVERY ONLY)</p>
 </div>
 
+<div id = "order">
+<hr>
+<h2> Order </h2>
+<form>
+  <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10"></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}}></input></div>
+  </form>
+</div>
+
 <div id = "empty"></div>
 </div>
 
