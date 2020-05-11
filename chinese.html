@@ -75,11 +75,11 @@ Hours: 11am - 8pm
  <!--  So I need to somehow extra the price of the item, and the number in the 'number' input, multiply
   them, and then add the resulting number to a "total" variable.  Hmmm -->
   <h3 class = "orderSec">Main</h3>
-  <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10"></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}}></input></div>
+  <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10" name = {{x.food}}></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}} id = {{x.food}}></input></div>
   <br>
   Total: <span id = "total"></span>
   <br>
-  <input type = "submit">
+  <input type = "submit" onClick = "total()">
   </form>
 </div>
 
@@ -139,6 +139,29 @@ function opened()
 {
    if (hours >= 11 && hours <= 20)
     document.getElementById("opened").innerHTML = "(Opened)";
+}
+
+function total()
+{
+  //this needs to gather the price (value) of all checked boxes, then multiply it by the value of adjacent number input
+  $('input[type=checkbox]').each(function () {
+    if (this.checked)
+      {
+        console.log($(this).val());
+        var quantityId = this.id;
+        console.log(quantityId);
+        var money = $('input[name=quantityId]').val();
+        console.log(money);
+        //why doesn't the above give me the number in the input?
+
+
+        var money2 = document.getElementsByName(quantityId).value;
+        console.log(money2);
+        //the above also comes back "undefined.""  WTF!?
+      }
+  }
+);
+
 }
 </script>
 
