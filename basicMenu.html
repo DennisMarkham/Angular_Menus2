@@ -32,13 +32,25 @@
 	{
 		float: left;
 	}
+
+	input[type='number']
+	{
+		width: 30px;
+	}
 </style>
 
 </head>
 <body>
-<input type = "number" min = "0" max = "10" name = "hotdogQ" id = "hotdogQ"></input> Hot Dog 4.00<input type = "checkbox" value = "4.00" id = "hotdog"></input></div>
-<input type = "number" min = "0" max = "10" name = "burgerQ" id = "burgerQ"></input> Hamburger 5.00<input type = "checkbox" value = "5.00" id = "burger"></input></div>
-<input type = "number" min = "0" max = "10" name = "pizzaQ" id = "pizzaQ"></input> Pizza 3.00<input type = "checkbox" value = "3.00" id = "pizza"></input></div>
+<input type = "checkbox" value = "4.00" id = "hotdog"></input>Hot Dog 4.00 <input type = "number" min = "0" max = "10" name = "hotdogQ" id = "hotdogQ"></input> 
+<br>
+<br>
+<input type = "checkbox" value = "5.00" id = "burger"></input> Hamburger 5.00
+<input type = "number" min = "0" max = "10" name = "burgerQ" id = "burgerQ"></input>
+<br>
+<br>
+<input type = "checkbox" value = "3.00" id = "pizza"></input> Pizza 3.00 <input type = "number" min = "0" max = "10" name = "pizzaQ" id = "pizzaQ"></input> 
+<br>
+<br>
   <input type = "submit" data-toggle="modal" data-target="#myModal" onClick = "total()">
 
 
@@ -78,6 +90,8 @@
 	var getBurger = document.getElementById("burger");
 	var getPizza = document.getElementById("pizza");
 
+
+
   	function total()
   	{
   		if (getHotDog.checked == true)
@@ -113,9 +127,35 @@
   	}
 
 //this is supposed to clear the text in the modal, why doesn't it work?
-$('#myModal').on('hidden.bs.modal', function () {
-  $("#totCost").clear();
-  $("#cost").clear();
+// $('#myModal').on('hidden', function () {
+//   $("#totCost").empty();
+//   $("#details").empty();
+//   $("cost").val(0);
+// })
+
+
+
+$(".close").click(function()
+{
+	  $("#totCost").empty();
+  $("#details").empty();
+ cost = 0;
+})
+
+$(".btn btn-danger").click(function()
+{
+	  $("#totCost").empty();
+  $("#details").empty();
+  cost = 0;
+ 
+})
+
+$(".btn btn-success").click(function()
+{
+	  $("#totCost").empty();
+  $("#details").empty();
+  console.log(cost);
+cost = 0;
 })
 
 
