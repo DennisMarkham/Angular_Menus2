@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="menuCtrl">
+  <div ng-repeat = "x in main">
+  	<button ng-click = "addToCart(x.food, x.price, document.getElementById(x.id).val())">Add to cart?</button>{{x.food}} {{x.price}} <input type = "number" min = "0" max = "10" id = {{x.id}}></input> 
+
+  </div>
+  <button>finish</button>
+</div>
+
+<script>
+
+
+angular.module('myApp', []).controller('menuCtrl', function($scope) {
+  $scope.main = [
+    {food:'Hotdog', price:'4.00', id: 'dog'},
+    {food:'Hamburger', price: '5.00', id: 'burger'},
+    {food:'Pizza', price: '3.00', id: 'pizza'}
+  ];
+
+$scope.addToCart = function(item, price, quantity)
+{
+	console.log(item + " " + price + " " + quantity)
+	//we'll put these in an array displayed in a modal soon, but for now keep it simple.
+	//anyway this works well enough, except I don't know how to get the value of the input feild
+}
+
+})
+</script>
+</body>
+</html>
