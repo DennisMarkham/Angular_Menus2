@@ -10,14 +10,22 @@
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 
-<body onload = "opened()">
+<body onload = "checkOpened()">
 
 
 <div ng-app="myApp" ng-controller="menuCtrl">
 <h1>DingLong's Table</h1>
 <h2>Chinese Cuisine</h2>
 <h2><span style = "background-color:gold; padding: 2px;"> DINE IN/TAKE OUT </span></h2>
-Hours: 11am - 8pm
+Hours: 
+<br>
+Monday - Thursday: 11am - 8pm
+<br>
+Friday - Saturday: 11am - 9pm
+<br>
+Sunday: 11am - 7pm
+<br>
+<br>
 <span id = "opened"> (Closed) </span>
 <br>
   <h2> Appetizers </h2>
@@ -79,7 +87,7 @@ Hours: 11am - 8pm
   <br>
   Total: <span id = "total"></span>
   <br>
-  <input type = "submit" value="submit" onClick = "total()">
+  <input type = "submit" value = "submit" onClick = "total()">
   </form>
 </div>
 
@@ -131,14 +139,64 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
   
 });
 
-// real:
+
 var hours = parseFloat(moment().startOf('day').fromNow());
-// tester:
-// var hours = 12;
-function opened()
+
+const d = new Date();
+let day = d.getDay();
+
+function sayOpened()
 {
-   if (hours >= 11 && hours <= 20)
-    document.getElementById("opened").innerHTML = "(Opened)";
+	document.getElementById("opened").innerHTML = "(Opened)";
+}
+
+function weekdayCheck()
+{
+
+if (hours >= 11 && hours <= 19){
+    sayOpened();
+}
+
+}
+
+function weekendCheck()
+{
+
+if (hours >= 11 && hours <= 21){
+   sayOpened();
+}
+
+}
+
+function sundayCheck()
+{
+
+if (hours >= 11 && hours <= 20){
+    sayOpened();
+}
+
+}
+
+
+function checkOpened()
+{
+	const d = new Date();
+let day = d.getDay();
+
+	if (day == 0)
+	{
+		sundayCheck();
+	}
+	else if (day > 0 && day < 5)
+	{
+	   weekdayCheck();
+	}
+	else if (day == 5 || day == 6)
+	{
+	  weekendCheck(); 	
+	}
+   // if (hours >= 11 && hours <= 20)
+   //  document.getElementById("opened").innerHTML = "(Opened)";
 }
 
 function total()
