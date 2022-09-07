@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <title>DingLong's Menu</title>
   <meta name="description" content ="Fake Chinese restaraunt menu." />
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -83,19 +85,28 @@ Sunday: 11am - 7pm
  <!--  So I need to somehow extra the price of the item, and the number in the 'number' input, multiply
   them, and then add the resulting number to a "total" variable.  Hmmm -->
   <h3 class = "orderSec">Main</h3>
-  <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10" name = {{x.food}}></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}} id = {{x.food}}></input></div>
+  <div ng-repeat = "x in main"><input type = "number" min = "0" max = "10" name = {{x.food}}></input> {{x.food}} ({{x.price | currency}})<input type = "checkbox" value = {{x.price}} id = {{x.food}} onchange="runDisabilityCheck()"></input></div>
   <br>
   Total: <span id = "total"></span>
   <br>
-  <input type = "submit" value = "submit" onClick = "total()">
+  <input type = "submit" value = "submit" onClick = "total(event)">
   </form>
 </div>
 
 <div id = "empty"></div>
 </div>
 
-
+<!-- 
+attempt to move controller to external file failed.  Not sure why
+  <script src="chineseController.js"></script> -->
 <script>
+
+//REMAINING OBJECTIS
+//-move controller to outside file
+//-number inputs activated by checkboxes
+//
+
+
 angular.module('myApp', []).controller('menuCtrl', function($scope) {
   $scope.main = [
     {food:'Shrimp Lo-Mien', price:'15', spice: "none"},
@@ -123,14 +134,26 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
     {food: 'Beer (Corona, Bud Light, Samuel Adams)', price: '4'}
   ]
 
-//OB = filter
-//OBM = function
-//MOB = function input
+// $scope.runDisabilityCheck = function(){
 
-//so what I want, in theory, is some function which checks if the input, MOB, is already food
-//or price, ie if its already what is trying to switch to, and if so ordersBy in reverse.  Checking
-//seems easy, ordering in reverse seems nigh impossible.  Hm.
-//though you could have two buttons, each represented by a different arrow.
+
+// //this fires, but then...
+// console.log("Change detected");
+
+// for (let i = 0; i < foodPrices.length; i++){
+
+// if(foodPrices[i].checked)
+// {
+//   //neither of this work
+//   foodNumberBoxes[i].ng-disabled = false; 
+// // foodNumberBoxes[i].removeAttribute("disabled");
+// }
+
+// }
+
+// }
+
+
   $scope.orderByMe = function(x) {
     $scope.myOrderBy = x;
   }
@@ -140,6 +163,7 @@ angular.module('myApp', []).controller('menuCtrl', function($scope) {
 });
 
 
+
 var hours = parseFloat(moment().startOf('day').fromNow());
 
 const d = new Date();
@@ -147,7 +171,7 @@ let day = d.getDay();
 
 function sayOpened()
 {
-	document.getElementById("opened").innerHTML = "(Opened)";
+  document.getElementById("opened").innerHTML = "(Opened)";
 }
 
 function weekdayCheck()
@@ -180,47 +204,93 @@ if (hours >= 11 && hours <= 20){
 
 function checkOpened()
 {
-	const d = new Date();
+  const d = new Date();
 let day = d.getDay();
 
-	if (day == 0)
-	{
-		sundayCheck();
-	}
-	else if (day > 0 && day < 5)
-	{
-	   weekdayCheck();
-	}
-	else if (day == 5 || day == 6)
-	{
-	  weekendCheck(); 	
-	}
+  if (day == 0)
+  {
+    sundayCheck();
+  }
+  else if (day > 0 && day < 5)
+  {
+     weekdayCheck();
+  }
+  else if (day == 5 || day == 6)
+  {
+    weekendCheck();   
+  }
    // if (hours >= 11 && hours <= 20)
    //  document.getElementById("opened").innerHTML = "(Opened)";
 }
+  
 
-function total()
+//okay, not sure why this doesn't work
+function runDisabilityCheck(){
+
+  //I'm declaring these twice because declaring them outside somehow made them 
+  //unavailable to the total function
+var foodNumberBoxes = document.querySelectorAll("input[type='number']");
+  var foodPrices = document.querySelectorAll("input[type='checkbox']");
+//this fires, but then...
+console.log("Change detected");
+
+for (let i = 0; i < foodPrices.length; i++){
+
+if(foodPrices[i].checked = true)
 {
-  //this needs to gather the price (value) of all checked boxes, then multiply it by the value of adjacent number input
-  $('input[type=checkbox]').each(function () {
-    if (this.checked)
-      {
-        console.log($(this).val());
-        var quantityId = this.id;
-        console.log(quantityId);
-        var money = $('input[name=quantityId]').val();
-        console.log(money);
-        //why doesn't the above give me the number in the input?
+  //this never fires
+  console.log("food price is checked");
 
-
-        var money2 = document.getElementsByName(quantityId).value;
-        console.log(money2);
-        //the above also comes back "undefined.""  WTF!?
-      }
-  }
-);
+  foodNumberBoxes[i].disabled = false; 
+  //does not undisable the box.  WTF!!!  This SHOULD work, given the 
+  //experiment I did on w3schools.
+  //ugh
 
 }
+
+}
+
+}
+
+
+
+function total(event){
+
+  event.preventDefault();
+  //so, for this one, for the total, I need to gather the number and price 
+var foodNumberBoxes = document.querySelectorAll("input[type='number']");
+  var foodPrices = document.querySelectorAll("input[type='checkbox']");
+var total = 0;
+
+  for (let i = 0; i < foodNumberBoxes.length; i++) {
+
+
+  if (foodNumberBoxes[i].value > 0){
+
+    let quantity = foodNumberBoxes[i].value;
+
+    let price = foodPrices[i].value;
+
+    total += quantity * price;
+}
+
+
+}
+
+console.log(total);
+
+document.getElementById("total").innerText = "$" + total.toFixed(2);
+//I need to turn this into an angular variable.  But we'll save that for later
+}
+
+
+
+
+
+
+
+
+
 </script>
 
 </body>
